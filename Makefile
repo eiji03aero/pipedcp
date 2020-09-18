@@ -19,7 +19,7 @@ test-unit:
 .PHONY: dev
 dev:
 	@cd build \
-		&& make \
+		&& make $(MAIN_NAME)\
 		&& ./$(MAIN_NAME)
 
 .PHONY: watch
