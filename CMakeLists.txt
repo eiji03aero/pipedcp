@@ -8,7 +8,7 @@ option(PIPEDCP_BUILD_TESTS "Build pipedcp's unit tests" OFF)
 file(GLOB SOURCES src/**/*.cpp)
 
 include_directories(include)
-add_library(${CMAKE_PROJECT_NAME} ${SOURCES})
+add_library(pipedcp ${SOURCES})
 
 # -------------------- gtest --------------------
 if (PIPEDCP_BUILD_TESTS)
