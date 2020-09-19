@@ -1,5 +1,10 @@
 MAIN_NAME = pipedcp
 
+.PHONY: build
+build:
+	@cd build \
+		&& make
+
 .PHONY: build-cmake
 build-cmake:
 	@cd build \
@@ -27,3 +32,7 @@ watch:
 	@reflex \
 		-r '(\.cpp|\.h)' \
 		-s $(MAKE) $(COMMAND)
+
+.PHONY: clean
+clean:
+	@rm -rf ./build/*

@@ -1,22 +1,17 @@
 cmake_minimum_required(VERSION 3.13.4)
+set(CMAKE_CXX_STANDARD 14)
 enable_testing()
 
-set(MAIN_NAME "pipedcp")
+project(pipedcp)
+option(PIPEDCP_BUILD_TESTS "Build pipedcp's unit tests" OFF)
 
-project(${MAIN_NAME})
-
-set(EXEC ${MAIN_NAME})
-set(CMAKE_CXX_STANDARD 14)
-
-set(PIPEDCP_BUILD_TEST "Build pipedcp's unit tests" ON)
-
-include_directories(include)
 file(GLOB SOURCES src/**/*.cpp)
 
-add_library(${EXEC} ${SOURCES})
+include_directories(include)
+add_library(${CMAKE_PROJECT_NAME} ${SOURCES})
 
 # -------------------- gtest --------------------
-if (PIPEDCP_BUILD_TEST)
+if (PIPEDCP_BUILD_TESTS)
   configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
   execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
     RESULT_VARIABLE result
@@ -42,5 +37,5 @@ if (PIPEDCP_BUILD_TEST)
   add_executable(process_test test/process_test.cpp ${SOURCES})
   target_link_libraries(process_test gtest_main)
   add_test(NAME process_test COMMAND process_test)
-endif(PIPEDCP_BUILD_TEST)
+endif()
 # -------------------- end gtest --------------------
